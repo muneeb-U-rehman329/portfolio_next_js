@@ -8,11 +8,7 @@ import Footer from '../Components/Footer/Footer';
 import HeroSection from '../Components/HeroSection/HeroSection';
 import Navbar from '../Components/NavBar/Navbar';
 import ProjectsSection from '../Components/ProjectsSection/ProjectsSection';
-
-const SkillsSection = dynamic(
-  () => import('../Components/SkillsSection/SkillsMarque'),
-  { ssr: false }
-);
+import SkillsSection from '../Components/SkillsSection/SkillsSection';
 
 export default function Home() {
   return (

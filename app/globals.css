@@ -105,6 +105,17 @@ body {
   }
 }
 
+/* globals.css */
+.no-scrollbar {
+  -ms-overflow-style: none;  /* IE and Edge */
+  scrollbar-width: none;     /* Firefox */
+}
+
+.no-scrollbar::-webkit-scrollbar {
+  display: none; /* Chrome, Safari */
+}
+
+
 
 .active-link {
   color: #f97316; /* orange.400 */

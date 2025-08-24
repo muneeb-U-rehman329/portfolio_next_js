@@ -9,13 +9,16 @@ import {
   FaFacebookSquare,
 } from 'react-icons/fa';
 import dynamic from 'next/dynamic';
+import { Link as ScrollLink } from 'react-scroll';
 
-const DotGrid = dynamic(() => import('../Ogl_animated/Ogl_animated'), { ssr: false });
+const DotGrid = dynamic(() => import('../Ogl_animated/Ogl_animated'), {
+  ssr: false,
+});
 
 function HeroSection() {
   return (
     <Flex
-    id='home'
+      id="home"
       bg={'#141414'}
       minH={{ base: '100vh', md: '900px' }}
       px={{ base: 4, sm: 10, md: 20, lg: 32 }}
@@ -57,25 +60,33 @@ function HeroSection() {
         </Text>{' '}
         <Flex alignItems={'center'} flexWrap={'wrap'} mt={-1} gap={'4'}>
           {' '}
-          <Text fontSize={{
-            base: '2xl',
-            sm: '2xl',
-            md: '4xl',
-            lg: '5xl',
-            xl: '6xl',
-            '2xl': '7xl',
-          }} fontWeight={'800'} color={'orange.400'}>
+          <Text
+            fontSize={{
+              base: '2xl',
+              sm: '2xl',
+              md: '4xl',
+              lg: '5xl',
+              xl: '6xl',
+              '2xl': '7xl',
+            }}
+            fontWeight={'800'}
+            color={'orange.400'}
+          >
             {' '}
             FullStack{' '}
           </Text>{' '}
-          <Text fontWeight={'600'}fontSize={{
-            base: '2xl',
-            sm: '2xl',
-            md: '3xl',
-            lg: '4xl',
-            xl: '5xl',
-            '2xl': '6xl',
-          }} color={'white'}>
+          <Text
+            fontWeight={'600'}
+            fontSize={{
+              base: '2xl',
+              sm: '2xl',
+              md: '3xl',
+              lg: '4xl',
+              xl: '5xl',
+              '2xl': '6xl',
+            }}
+            color={'white'}
+          >
             {' '}
             Developer{' '}
           </Text>
@@ -115,18 +126,27 @@ function HeroSection() {
         </Flex>
         {/* Button */}
         <Box my={9}>
-          <Button
-            variant={'unstyled'}
-            px={6}
-            py={6}
-            bg={'orange.400'}
-            textColor={'white'}
-            rounded={'none'}
-            border={'2px solid orange'}
-            _hover={{ bg: 'orange.500' }}
+          <ScrollLink
+            to={'contact'}
+            smooth={true}
+            delay={0}
+            duration={400}
+            offset={-10}
+            spy={true}
           >
-            Be in touch
-          </Button>
+            <Button
+              variant={'unstyled'}
+              px={6}
+              py={6}
+              bg={'orange.400'}
+              textColor={'white'}
+              rounded={'none'}
+              border={'2px solid orange'}
+              _hover={{ bg: 'orange.500' }}
+            >
+              Be in touch
+            </Button>
+          </ScrollLink>
         </Box>
       </Flex>
 
@@ -136,7 +156,7 @@ function HeroSection() {
         w={{ base: '100%', sm: '100%', md: '100%', lg: '50%', '2xl': '50%' }}
         h={{ base: '40vh', sm: '55vh', md: '65vh', lg: '75vh' }}
         right={{ base: '0', md: '0', lg: '50px', '2xl': '150px' }}
-        top={{ base: 'auto', sm: 'auto', lg:'4%', xl: '14%' }}
+        top={{ base: 'auto', sm: 'auto', lg: '4%', xl: '14%' }}
         bottom={{ base: '10', lg: 'auto' }}
         opacity={{ base: 0.4, md: 1 }}
       >

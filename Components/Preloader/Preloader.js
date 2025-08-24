@@ -9,7 +9,6 @@ const pressStart2P = Press_Start_2P({
   subsets: ['latin'],
   weight: '400',
   variable: '--font-press-start-2p',
-  display: 'swap',
 });
 
 const geistMono = Geist_Mono({
@@ -17,7 +16,6 @@ const geistMono = Geist_Mono({
   weight: '400',
   variable: '--font-geist-mono',
   display: 'swap',
-  preload: false,
 });
 
 export default function Preloader({ onFinish }) {
@@ -71,12 +69,14 @@ export default function Preloader({ onFinish }) {
   return (
     <Flex
       id="preloader"
-      className=" items-center justify-center fixed top-0 left-0 w-screen h-screen z-[9999] px-4 py-10"
+      className="no-scrollbar items-center justify-center fixed top-0 left-0 w-screen h-screen z-[9999] px-4 py-10 overflow-y-hidden "
       style={{
         background: 'black',
         backdropFilter: 'blur(100px)',
         flexDirection: 'column',
         gap: '20px',
+        msOverflowStyle: 'none',
+        scrollbarWidth: 'none',
       }}
     >
       <Box width="100%" maxWidth="1000px" className="fade-in">

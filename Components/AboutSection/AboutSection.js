@@ -53,6 +53,7 @@ function AboutSection() {
         alignItems={'center'}
         flexShrink={0}
         w={{ base: '100%', sm: '80%', md: '28rem', lg: '40rem' }}
+        h={{ base: 'auto', md: '45rem' }}
       >
         <ImageCard
           imageSrc={'/Images/my_image1.jpeg'}
@@ -76,6 +77,7 @@ function AboutSection() {
         w={{ base: '100%', md: '90%', lg: '55rem' }}
         pt={{ base: 6, lg: 4 }}
         pl={{ base: 0, lg: 6 }}
+        h={{ base: 'auto', md: '40rem' }}
       >
         <Text
           fontSize={{ base: '3xl', sm: '4xl', md: '5xl', lg: '6xl' }}
@@ -210,29 +212,30 @@ function AboutSection() {
                   { name: 'Express.js', icon: <SiExpress /> },
                   { name: 'MongoDB', icon: <SiMongodb /> },
                 ].map((skill, i) => (
-                  // <SpotLightcard
-                  //   key={i}
-                  //   spotlightColor="rgba(237,137,54,0.2)"
-                  //   padding={'0.4rem'}
-                  //   borderRadius={'12px'}
-                  // >
-                  <Flex
+                  <SpotLightcard
                     key={i}
-                    align="center"
-                    gap={2}
-                    px={3}
-                    py={2}
-                    color="whiteAlpha.900"
-                    fontSize="sm"
-                    fontWeight="600"
+                    spotlightColor="rgba(237,137,54,0.2)"
+                    padding={'0.4rem'}
+                    borderRadius={'12px'}
                   >
-                    <Box fontSize={{ md: 'md' }} color="orange.400">
-                      {skill.icon}
-                    </Box>
-                    <Box ml={2} fontSize={{ md: 'sm' }}>
-                      {skill.name}
-                    </Box>
-                  </Flex>
+                    <Flex
+                      key={i}
+                      align="center"
+                      gap={2}
+                      px={3}
+                      py={2}
+                      color="whiteAlpha.900"
+                      fontSize="sm"
+                      fontWeight="600"
+                    >
+                      <Box fontSize={{ md: 'md' }} color="orange.400">
+                        {skill.icon}
+                      </Box>
+                      <Box ml={2} fontSize={{ md: 'sm' }}>
+                        {skill.name}
+                      </Box>
+                    </Flex>
+                  </SpotLightcard>
                 ))}
               </SimpleGrid>
             </TabPanel>
