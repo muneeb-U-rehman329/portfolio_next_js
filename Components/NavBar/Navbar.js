@@ -1,5 +1,6 @@
 'use client';
 
+import React, { useState } from 'react';
 import {
   Box,
   Button,
@@ -7,11 +8,15 @@ import {
   Text,
   IconButton,
   useDisclosure,
+  Drawer,
+  DrawerOverlay,
+  DrawerContent,
+  DrawerCloseButton,
+  DrawerHeader,
+  DrawerBody,
 } from '@chakra-ui/react';
 import { HamburgerIcon } from '@chakra-ui/icons';
 import { Link as ScrollLink } from 'react-scroll';
-import React, { useState } from 'react';
-import { X } from 'lucide-react';
 
 function Navbar() {
   const { isOpen, onOpen, onClose } = useDisclosure();
@@ -55,13 +60,11 @@ function Navbar() {
               key={link.name}
               to={link.href}
               smooth={true}
-              delay={0}
               duration={400}
               offset={-10}
               spy={true}
               activeClass="active-link"
-              className="relative font-semibold uppercase tracking-normal text-base text-white cursor-pointer pb-1
-                 hover:text-orange-400 transition-colors"
+              className="relative font-semibold uppercase tracking-normal text-base text-white cursor-pointer pb-1 hover:text-orange-400 transition-colors"
             >
               {link.name}
             </ScrollLink>
@@ -77,8 +80,6 @@ function Navbar() {
           >
             <Button
               variant="unstyled"
-              // as={'a'}
-
               px={5}
               py={6}
               textColor="orange.400"
@@ -107,43 +108,33 @@ function Navbar() {
         />
       </Flex>
 
-      {/* Drawer Menu for Mobile */}
-      <div
-        className={`fixed top-0 right-0 h-full w-64 bg-zinc-900 shadow-2xl transform transition-transform duration-300 ease-in-out z-50 ${
-          isOpen ? 'translate-x-0' : 'translate-x-full'
-        }`}
-      >
-        {/* Header */}
-        <div className="p-6 border-b border-zinc-700 flex items-center justify-between">
-          <h2 className="text-white text-xl font-semibold">Menu</h2>
-          <button
-            onClick={onClose}
-            className="text-gray-400 hover:text-white transition-colors"
-          >
-            <X size={22} />
-          </button>
-        </div>
-
-        {/* Navigation Links */}
-        <div className="p-6 space-y-2">
-          {links.map((link) => (
-            <ScrollLink
-              key={link.name}
-              to={link.href}
-              smooth={true}
-              delay={0}
-              duration={200}
-              // spy={true}
-              offset={-80}
-              activeClass="bg-orange-400 text-white"
-              className="w-full block text-left px-3 py-2 rounded-lg transition-colors font-medium uppercase text-gray-300 hover:bg-zinc-700 hover:text-white cursor-pointer"
-              onClick={onClose}
-            >
-              {link.name}
-            </ScrollLink>
-          ))}
-        </div>
-      </div>
+      {/* Mobile Drawer Menu */}
+      <Drawer placement="right" onClose={onClose} isOpen={isOpen}>
+        <DrawerOverlay />
+        <DrawerContent bg="zinc.900">
+          <DrawerCloseButton color="white" />
+          <DrawerHeader borderBottomWidth="1px" borderColor="zinc.700" color="white">
+            Menu
+          </DrawerHeader>
+          <DrawerBody>
+            <Flex direction="column" gap={3}>
+              {links.map((link) => (
+                <ScrollLink
+                  key={link.name}
+                  to={link.href}
+                  smooth={true}
+                  duration={200}
+                  offset={-80}
+                  onClick={onClose}
+                  className="w-full block text-left px-3 py-2 rounded-lg transition-colors font-medium uppercase text-gray-300 hover:bg-zinc-700 hover:text-white cursor-pointer"
+                >
+                  {link.name}
+                </ScrollLink>
+              ))}
+            </Flex>
+          </DrawerBody>
+        </DrawerContent>
+      </Drawer>
     </Box>
   );
 }

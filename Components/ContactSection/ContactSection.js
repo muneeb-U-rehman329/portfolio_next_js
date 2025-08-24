@@ -1,7 +1,9 @@
 'use client';
 import React, { useRef, useState } from 'react';
 import ProfileCard from '../ProfileCard/ProfileCard';
-import SpotlightCard from '../SpotlightCard/SpotLightcard';
+import dynamic from 'next/dynamic';
+const SpotLightcard = dynamic(() => import("../SpotlightCard/SpotLightcard"), { ssr: false });
+
 import {
   Box,
   Flex,
@@ -69,7 +71,7 @@ function ContactSection() {
 
   const sendEmail = (e) => {
     e.preventDefault();
-    if (!validate()) return; // stop if form invalid
+    if (!validate()) return;
     setLoading(true);
 
     emailjs
@@ -115,11 +117,11 @@ function ContactSection() {
       justify="center"
       align="center"
     >
-      <SpotlightCard
+      {/* <SpotLightcard
         spotlightColor="rgba(237, 137, 54, 0.09)"
         padding={'1rem'}
         className="custom-spotlight-card"
-      >
+      > */}
         <Flex
           position={'relative'}
           flexWrap={'wrap'}
@@ -345,7 +347,7 @@ function ContactSection() {
             </form>
           </Box>
         </Flex>
-      </SpotlightCard>
+      {/* </SpotLightcard> */}
     </Flex>
   );
 }

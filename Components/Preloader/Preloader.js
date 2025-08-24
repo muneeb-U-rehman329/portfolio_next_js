@@ -9,15 +9,18 @@ const pressStart2P = Press_Start_2P({
   subsets: ['latin'],
   weight: '400',
   variable: '--font-press-start-2p',
+  display: 'swap',
 });
 
 const geistMono = Geist_Mono({
   subsets: ['latin'],
   weight: '400',
   variable: '--font-geist-mono',
+  display: 'swap',
+  preload: false,
 });
 
-export default function Preloader() {
+export default function Preloader({ onFinish }) {
   const [progress, setProgress] = useState(0);
 
   useEffect(() => {
@@ -52,6 +55,7 @@ export default function Preloader() {
             onComplete: () => {
               const el = document.getElementById('preloader');
               if (el) el.style.display = 'none';
+              if (onFinish) onFinish(); // 🔑 Tell parent preloader finished
             },
           });
         }, 500);
@@ -62,7 +66,7 @@ export default function Preloader() {
     }, 30);
 
     return () => clearInterval(interval);
-  }, []);
+  }, [onFinish]);
 
   return (
     <Flex
@@ -78,7 +82,7 @@ export default function Preloader() {
       <Box width="100%" maxWidth="1000px" className="fade-in">
         <svg
           width="100%"
-          height="auto"
+          height="100%"
           viewBox="0 0 1000 300"
           xmlns="http://www.w3.org/2000/svg"
           fill="#595959"

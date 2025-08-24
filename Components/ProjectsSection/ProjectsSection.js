@@ -1,10 +1,10 @@
 'use client';
 
 import React from 'react';
-import SpotlightCard from '../SpotlightCard/SpotLightcard';
 import { Box, SimpleGrid, Text, Flex, Badge, Button } from '@chakra-ui/react';
-import ImageCard from '../ImageCard/ImageCard';
-
+import dynamic from 'next/dynamic';
+const ImageCard = dynamic(() => import("../ImageCard/ImageCard"), { ssr: false });
+const SpotLightcard = dynamic(() => import("../SpotlightCard/SpotLightcard"), { ssr: false });
 const projects = [
   {
     title: 'Instagram Auth',
@@ -55,14 +55,14 @@ function ProjectsSection() {
 
       <SimpleGrid columns={{ base: 1, md: 2, lg: 3 }} spacing={10}>
         {projects.map((project, index) => (
-          <SpotlightCard
-            key={index}
-            spotlightColor="rgba(237, 137, 54, 0.13)"
-            padding={'1rem'}
-            className="custom-spotlight-card"
-          >
-            <Box p={6}>
-              <ImageCard
+          // <SpotLightcard
+          //   key={index}
+          //   spotlightColor="rgba(237, 137, 54, 0.13)"
+          //   padding={'1rem'}
+          //   className="custom-spotlight-card"
+          // >
+            <Box key={index} p={6}>
+              {/* <ImageCard
                 imageSrc={project.image}
                 altText={project.title}
                 captionText=""
@@ -76,7 +76,7 @@ function ProjectsSection() {
                 showMobileWarning={false}
                 showTooltip={false}
                 displayOverlayContent={false}
-              />
+              /> */}
 
               <Text
                 fontSize="xl"
@@ -123,7 +123,6 @@ function ProjectsSection() {
                 </Button>
               </Flex>
             </Box>
-          </SpotlightCard>
         ))}
       </SimpleGrid>
     </Box>

@@ -1,9 +1,8 @@
 'use client';
 
 import { useRef, useState } from 'react';
-import { motion, useMotionValue, useSpring } from 'motion/react';
+import { motion, useMotionValue, useSpring } from 'framer-motion';
 import './ImageCard.css';
-import { border } from '@chakra-ui/react';
 
 const springValues = {
   damping: 30,
@@ -11,7 +10,7 @@ const springValues = {
   mass: 2,
 };
 
-export default function TiltedCard({
+export default function ImageCard({
   imageSrc,
   altText = 'Tilted card image',
   captionText = '',
@@ -30,8 +29,11 @@ export default function TiltedCard({
 }) {
   const ref = useRef(null);
 
-  const x = useMotionValue();
-  const y = useMotionValue();
+
+
+  // Motion values
+  const x = useMotionValue(0);
+  const y = useMotionValue(0);
   const rotateX = useSpring(useMotionValue(0), springValues);
   const rotateY = useSpring(useMotionValue(0), springValues);
   const scale = useSpring(1, springValues);
@@ -44,8 +46,8 @@ export default function TiltedCard({
 
   const [lastY, setLastY] = useState(0);
 
-  function handleMouse(e) {
-    if (!ref.current) return;
+  const handleMouse = (e) => {
+    if (!ref.current || !e.clientX || !e.clientY) return;
 
     const rect = ref.current.getBoundingClientRect();
     const offsetX = e.clientX - rect.left - rect.width / 2;
@@ -63,20 +65,20 @@ export default function TiltedCard({
     const velocityY = offsetY - lastY;
     rotateFigcaption.set(-velocityY * 0.6);
     setLastY(offsetY);
-  }
+  };
 
-  function handleMouseEnter() {
+  const handleMouseEnter = () => {
     scale.set(scaleOnHover);
     opacity.set(1);
-  }
+  };
 
-  function handleMouseLeave() {
+  const handleMouseLeave = () => {
     opacity.set(0);
     scale.set(1);
     rotateX.set(0);
     rotateY.set(0);
     rotateFigcaption.set(0);
-  }
+  };
 
   return (
     <figure
@@ -86,7 +88,7 @@ export default function TiltedCard({
         height: containerHeight,
         width: containerWidth,
         backgroundColor: 'black',
-        borderRadius: borderRadius || '35px',
+        borderRadius: borderRadius,
       }}
       onMouseMove={handleMouse}
       onMouseEnter={handleMouseEnter}
@@ -107,7 +109,7 @@ export default function TiltedCard({
           rotateY,
           scale,
           backgroundColor: 'black',
-          borderRadius: '35px',
+          borderRadius,
         }}
       >
         <motion.img
@@ -118,8 +120,9 @@ export default function TiltedCard({
             width: imageWidth,
             height: imageHeight,
             objectFit: 'contain',
-             filter: filter || 'none',
+            filter,
           }}
+          draggable={false} // ✅ prevents weird drag issues
         />
 
         {displayOverlayContent && overlayContent && (

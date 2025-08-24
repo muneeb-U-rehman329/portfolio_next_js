@@ -3,10 +3,18 @@
 import { useRef } from "react";
 import "./SpotLightCard.css";
 
-const SpotlightCard = ({ children, className = "", spotlightColor = "rgba(255, 255, 255, 0.25)", padding, borderRadius}) => {
+const SpotLightcard = ({
+  children,
+  className = "",
+  spotlightColor = "rgba(255, 255, 255, 0.25)",
+  padding,
+  borderRadius,
+}) => {
   const divRef = useRef(null);
 
   const handleMouseMove = (e) => {
+    if (!divRef.current) return;
+
     const rect = divRef.current.getBoundingClientRect();
     const x = e.clientX - rect.left;
     const y = e.clientY - rect.top;
@@ -22,8 +30,8 @@ const SpotlightCard = ({ children, className = "", spotlightColor = "rgba(255, 2
       onMouseMove={handleMouseMove}
       className={`card-spotlight ${className}`}
       style={{
-         padding: padding || "2rem",
-          borderRadius: borderRadius || "1.5rem",
+        padding: padding || "2rem",
+        borderRadius: borderRadius || "1.5rem",
       }}
     >
       {children}
@@ -31,4 +39,4 @@ const SpotlightCard = ({ children, className = "", spotlightColor = "rgba(255, 2
   );
 };
 
-export default SpotlightCard;
+export default SpotLightcard;

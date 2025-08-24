@@ -2,13 +2,15 @@
 
 import React from 'react';
 import { Box, Button, Flex, Text } from '@chakra-ui/react';
-import DotGrid from '../Ogl_animated/Ogl_animated';
 import {
   FaGithub,
   FaLinkedin,
   FaInstagram,
   FaFacebookSquare,
 } from 'react-icons/fa';
+import dynamic from 'next/dynamic';
+
+const DotGrid = dynamic(() => import('../Ogl_animated/Ogl_animated'), { ssr: false });
 
 function HeroSection() {
   return (

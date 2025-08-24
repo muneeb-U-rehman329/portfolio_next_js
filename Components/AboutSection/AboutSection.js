@@ -18,14 +18,20 @@ import { SiNextdotjs, SiMongodb, SiExpress } from 'react-icons/si';
 import { SiChakraui, SiRedux, SiTailwindcss } from 'react-icons/si';
 import { FaGithub, FaGit } from 'react-icons/fa';
 import { MdWork, MdOutlineAssignment } from 'react-icons/md';
-import ImageCard from '../ImageCard/ImageCard';
-import SpotlightCard from '../SpotlightCard/SpotLightcard';
 import React from 'react';
+
+import dynamic from 'next/dynamic';
+const ImageCard = dynamic(() => import('../ImageCard/ImageCard'), {
+  ssr: false,
+});
+const SpotLightcard = dynamic(() => import('../SpotlightCard/SpotLightcard'), {
+  ssr: false,
+});
 
 function AboutSection() {
   return (
     <Flex
-    id='about'
+      id="about"
       bg={'#141414'}
       direction={{ base: 'column', lg: 'row' }}
       pt={{ base: 10, md: 16, lg: 20 }}
@@ -33,6 +39,13 @@ function AboutSection() {
       pb={{ base: 10, lg: 20 }}
       gap={{ base: 10, lg: 16 }}
       alignItems="center"
+      flexWrap={{
+        base: 'wrap',
+        md: 'wrap',
+        lg: 'wrap',
+        xl: 'nowrap',
+        '2xl': 'nowrap',
+      }}
     >
       {/* Image Section */}
       <Flex
@@ -42,7 +55,7 @@ function AboutSection() {
         w={{ base: '100%', sm: '80%', md: '28rem', lg: '40rem' }}
       >
         <ImageCard
-          imageSrc="/Images/my_image1.jpeg"
+          imageSrc={'/Images/my_image1.jpeg'}
           altText=""
           captionText=""
           containerHeight="37rem"
@@ -60,7 +73,7 @@ function AboutSection() {
 
       {/* Content Section */}
       <Box
-        w={{ base: '100%', md: '90%', lg: '60rem' }}
+        w={{ base: '100%', md: '90%', lg: '55rem' }}
         pt={{ base: 6, lg: 4 }}
         pl={{ base: 0, lg: 6 }}
       >
@@ -197,29 +210,29 @@ function AboutSection() {
                   { name: 'Express.js', icon: <SiExpress /> },
                   { name: 'MongoDB', icon: <SiMongodb /> },
                 ].map((skill, i) => (
-                  <SpotlightCard
+                  // <SpotLightcard
+                  //   key={i}
+                  //   spotlightColor="rgba(237,137,54,0.2)"
+                  //   padding={'0.4rem'}
+                  //   borderRadius={'12px'}
+                  // >
+                  <Flex
                     key={i}
-                    spotlightColor="rgba(237,137,54,0.2)"
-                    padding={'0.4rem'}
-                    borderRadius={'12px'}
+                    align="center"
+                    gap={2}
+                    px={3}
+                    py={2}
+                    color="whiteAlpha.900"
+                    fontSize="sm"
+                    fontWeight="600"
                   >
-                    <Flex
-                      align="center"
-                      gap={2}
-                      px={3}
-                      py={2}
-                      color="whiteAlpha.900"
-                      fontSize="sm"
-                      fontWeight="600"
-                    >
-                      <Box fontSize={{md: 'md' }} color="orange.400">
-                        {skill.icon}
-                      </Box>
-                      <Box ml={2} fontSize={{md: 'sm' }}>
+                    <Box fontSize={{ md: 'md' }} color="orange.400">
+                      {skill.icon}
+                    </Box>
+                    <Box ml={2} fontSize={{ md: 'sm' }}>
                       {skill.name}
-                      </Box>
-                    </Flex>
-                  </SpotlightCard>
+                    </Box>
+                  </Flex>
                 ))}
               </SimpleGrid>
             </TabPanel>
